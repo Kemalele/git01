@@ -1,8 +1,5 @@
 const tests = []
 const t = (f) => tests.push(f)
-const get = (key) => sourceObject[String(key)]
-const set = (key, value) => sourceObject[String(key)] = value
-
 const eq = (a, b) => {
     if (a === b) {
         return true
@@ -10,15 +7,15 @@ const eq = (a, b) => {
         return false
     }
 }
-const sourceObject = {
-    num: 42,
-    bool: true,
-    str: 'some text',
-    log: console.log,
-}
 
-set('num', 55)
-console.log(set('num', 55))
+const circular = {}
+circular.circular = circular
+
+t(() => circular.constructor === Object)
+t(() => circular.circular === circular)
+t(() => circular.circular.circular === circular)
+t(() => circular.circular.circular.circular === circular)
+t(() => circular.circular.circular.circular.circular === circular)
 
 for (let i = 0; i < tests.length; i++) {
     console.log(tests[i]())
