@@ -8,15 +8,18 @@ const eq = (a, b) => {
     }
 }
 
-const circular = {}
-circular.circular = circular
+let smalls = Number.NEGATIVE_INFINITY
+let biggie = Number.POSITIVE_INFINITY
 
-t(() => circular.constructor === Object)
-t(() => circular.circular === circular)
-t(() => circular.circular.circular === circular)
-t(() => circular.circular.circular.circular === circular)
-t(() => circular.circular.circular.circular.circular === circular)
+// bigger
+t(() => typeof biggie !== 'undefined')
+t(() => biggie > 1.7976931348623157e308)
 
+// smaller
+t(() => typeof smalls !== 'undefined')
+t(() => smalls < -1.7976931348623157e308)
+
+Object.freeze(tests)
 for (let i = 0; i < tests.length; i++) {
     console.log(tests[i]())
 }
