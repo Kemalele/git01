@@ -1,15 +1,24 @@
 const tests = []
 const t = (f) => tests.push(f)
-const concatStr = (a, b) => String(a) + String(b)
+const get = (key) => sourceObject[key]
+const set = (key, value) => { sourceObject[key] = value }
 
-t(() => typeof concatStr === 'function', 'Should be a function')
-t(() => concatStr.length === 2, 'Should takes 2 arguments')
-t(() => concatStr('a', 'b') === 'ab')
-t(() => concatStr('yolo', 'swag') === 'yoloswag')
+const eq = (a, b) => {
+    if (a === b) {
+        return true
+    } else {
+        return false
+    }
+}
+const sourceObject = {
+    num: 42,
+    bool: true,
+    str: 'some text',
+    log: console.log,
+}
 
-// handle non strings correctly
-t(() => concatStr(1, 2) === '12')
-t(() => concatStr(concatStr, concatStr) === String(concatStr).repeat(2))
+set('num', 10)
+console.log(get('num'))
 
 for (let i = 0; i < tests.length; i++) {
     console.log(tests[i]())
