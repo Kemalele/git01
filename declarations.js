@@ -16,5 +16,3 @@ const nested = {
         bool: false
     }
 }
-
-console.log(escapeStr, arr, obj, nested)
