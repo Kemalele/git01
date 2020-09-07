@@ -1,7 +1,10 @@
 const tests = []
 const t = (f) => tests.push(f)
 const get = (key) => sourceObject[key]
-const set = (key, value) => { sourceObject[key] = value }
+const set = (key, value) => {
+    sourceObject[key] = value
+    return value
+}
 
 const eq = (a, b) => {
     if (a === b) {
@@ -17,8 +20,8 @@ const sourceObject = {
     log: console.log,
 }
 
-set('num', 10)
-console.log(get('num'))
+set('num', 55)
+console.log(set('num', 55))
 
 for (let i = 0; i < tests.length; i++) {
     console.log(tests[i]())
