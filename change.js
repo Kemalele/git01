@@ -1,5 +1,2 @@
-const get = (key) => sourceObject[key]
-const set = (key, value) => {
-    sourceObject[key] = value
-    return value
-}
+const get = (key) => sourceObject[String(key)]
+const set = (key, value) => sourceObject[String(key)] = value
