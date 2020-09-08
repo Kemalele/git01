@@ -7,21 +7,21 @@ const eq = (a, b) => {
         return false
     }
 }
+const abs = (num) => num === 0 ? 0 : num > 0 ? num : -num
+const isPositive = (a) => a > 0 ? true : false
 
-const words = (str) => str.split(" ")
-const sentence = (arr) => arr.join(" ")
-const yell = (str) => str.toUpperCase()
-const whisper = (str) => '*' + str.toLowerCase() + '*'
-const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase()
-    // t(({ eq }) => eq(words('a b c'), ['a', 'b', 'c']))
-    // t(({ eq }) => eq(words('Hello  world'), ['Hello', '', 'world']))
-    // t(({ eq, ctx: r }) => eq(words(`${r} ${r} ${r}`), [r, r, r]))
-    // sentence
-t(({ eq }) => eq(capitalize('str'), 'Str'))
-t(({ eq }) => eq(capitalize('qsdqsdqsd'), 'Qsdqsdqsd'))
-t(({ eq }) => eq(capitalize('STR'), 'Str'))
-t(({ eq }) => eq(capitalize('zapZAP'), 'Zapzap'))
-t(({ eq }) => eq(capitalize('zap ZAP'), 'Zap zap'))
+t(() => isPositive(3))
+t(() => isPositive(1998790))
+t(() => !isPositive(-1))
+t(() => !isPositive(-0.7))
+t(() => !isPositive(-787823))
+t(() => !isPositive(0))
+
+t(({ eq }) => eq(abs(0), 0))
+t(({ eq }) => eq(abs(-1), 1))
+t(({ eq }) => eq(abs(-13.2), 13.2))
+t(({ eq }) => eq(abs(132), 132))
+
 
 Object.freeze(tests)
 for (let i = 0; i < tests.length; i++) {
