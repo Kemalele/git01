@@ -1,7 +1,7 @@
 is.num = (arg) => typeof arg === 'number'
 is.nan = (arg) => Number.isNaN(arg)
 is.str = (arg) => typeof arg === 'string'
-is.bool = (arg) => typeof arg === 'bool'
+is.bool = (arg) => typeof arg === 'boolean'
 is.undef = (arg) => typeof arg === 'undefined'
 is.def = (arg) => typeof arg !== 'undefined'
 is.arr = (arg) => Array.isArray(arg)
