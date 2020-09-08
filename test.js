@@ -1,23 +1,6 @@
 const tests = []
 const t = (f) => tests.push(f)
 
-const is = {}
-
-is.num = (arg) => typeof(arg) === 'number' ? true : false
-is.nan = (arg) => typeof(arg) === 'NaN' ? true : false
-is.str = (arg) => typeof(arg) === 'string' ? true : false
-is.bool = (arg) => typeof(arg) === 'bool' ? true : false
-is.undef = (arg) => typeof(arg) === 'undefined' ? true : false
-is.def = (arg) => typeof(arg) === 'defined' ? true : false
-is.arr = (arg) => typeof(arg) === 'array' ? true : false
-is.obj = (arg) => typeof(arg) === 'object' ? true : false
-is.fun = (arg) => typeof(arg) === 'function' ? true : false
-is.truthy = (arg) => { if (arg) { return true } return false }
-is.falsy = (arg) => { if (!arg) { return false } return false }
-
-const tests = []
-const t = (f) => tests.push(f)
-
 export const setup = () => [
     0,
     NaN,
@@ -34,7 +17,23 @@ export const setup = () => [
     console.log,
     void 0,
 ]
+function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+
+  
+    for (var i = 0; i < a.length; ++i) {
+        if (a[i] !== b[i]) {console.log(a[i],b[i]);return false};
+    }
+
+    return true;
+  }
+
 const eq = (a, b) => {
+    if (Array.isArray(a) && Array.isArray(b)) {
+        return arraysEqual(a,b)
+    }
+    
+    
     if (a === b) {
         return true
     } else {
@@ -45,9 +44,9 @@ const eq = (a, b) => {
 const ctx = {}
 ctx.filter = (fun) => {
     let arr = []
-    for (let i = 0; i < setup.length; i++) {
-        if (fun(setup[i])) {
-            arr.push(setup[i])
+    for (let i = 0; i < setup().length; i++) {
+        if (fun(setup()[i])) {
+            arr.push(setup()[i])
         }
     }
 
@@ -56,6 +55,12 @@ ctx.filter = (fun) => {
 
 const match = ({ eq, ctx }, fun, values) => eq(ctx.filter(fun), values)
 
+const is = {}
+
+
+
+console.log(eq(ctx.filter(is.num), [0, NaN]))
+console.log(eq(NaN, NaN))
 // the array of value here is the ones that your function should
 // return true too, while returning false to every others.
 t((_) => match(_, is.num, [0, NaN]))
@@ -90,6 +95,7 @@ t((_) =>
 )
 
 Object.freeze(tests)
+
 for (let i = 0; i < tests.length; i++) {
     console.log(tests[i]({ eq, ctx }))
 }
