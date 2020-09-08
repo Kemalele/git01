@@ -7,5 +7,5 @@ is.def = (arg) => typeof arg !== 'undefined'
 is.arr = (arg) => Array.isArray(arg)
 is.obj = (arg) => !Array.isArray(arg) && arg !== null && typeof arg === 'object'
 is.fun = (arg) => typeof arg === 'function'
-is.truthy = (arg) => { if (arg) { return true } return false }
-is.falsy = (arg) => { if (!arg) { return false } return false }
+is.truthy = (arg) => !!arg
+is.falsy = (arg) => !arg
