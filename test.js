@@ -8,18 +8,40 @@ const eq = (a, b) => {
     }
 }
 
-const repeat = (str, nbr) => nbr === 0 ? '' : nbr === 1 ? str : str += repeat(str, nbr - 1)
+const modulo = (a, b) => {
+    let res = 0
+    let isNegative = false
+    if (a < b && a > 0) {
+        return a
+    }
 
-t(() => typeof repeat === 'function')
-t(() => repeat.length === 2)
-t(() => repeat('a', 3) === 'aaa')
-t(() => repeat('ba', 10) === 'babababababababababa')
-t(() => repeat('pouet', 2) === 'pouetpouet')
-t(() => repeat('haha', 1) === 'haha')
-t(() => repeat('hehehe', 0) === '')
+    if (a < 0) {
+        a = -a
+        isNegative = true
+    }
 
+    if (b < 0) {
+        b = -b
+    }
 
+    for (let i = a; i >= b; i -= b) {
+        res = i
+    }
+    res = res - b
+    if (isNegative) {
+        res = -res
+    }
+    return res
+}
 
+t(() => modulo(34, 78) === 34)
+t(() => modulo(78, 34) === 10)
+t(() => modulo(123, 22) === 13)
+t(() => modulo(123, -22) === 13)
+t(() => modulo(-123, 22) === -13)
+t(() => modulo(-123, -22) === -13)
+
+console.log(modulo(-123, 22))
 Object.freeze(tests)
 
 for (let i = 0; i < tests.length; i++) {
