@@ -8,20 +8,22 @@ const eq = (a, b) => {
     }
 }
 
-const lastIndexOf = (arr, value, fromIndex = arr.length - 1) => {
-    for (let i = fromIndex; i >= 0; i--) {
+const includes = (arr, value) => {
+    for (let i = 0; i < arr.length; i++) {
         if (arr[i] === value) {
-            return i
+            return true
         }
     }
 
-    return last
+    return false
 }
 
 t(() => lastIndexOf([1, 2, 3, 4, 5, 4, 3, 2, 1], 2) === 7)
 t(() => lastIndexOf([0, 0, t, t], t) === 3)
 t(() => lastIndexOf([0, 0, t, t], t, 3) === 3)
 t(() => lastIndexOf([t, 0, 0, t], t, 2) === 0)
+t(({ ctx }) => lastIndexOf(bigArray, ctx.rn) === ctx.rn + 999)
+t(({ ctx }) => lastIndexOf(bigArray, {}) === -1)
 
 Object.freeze(tests)
 

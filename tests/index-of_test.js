@@ -1,7 +1,7 @@
 Array.prototype.indexOf = undefined
 Array.prototype.lastIndexOf = undefined
 Array.prototype.includes = undefined
-// /*/ // ⚡
+    // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 const bigArray = [...Array(999).keys(), ...Array(999).keys()]
