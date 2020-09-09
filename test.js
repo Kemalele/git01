@@ -7,61 +7,106 @@ const eq = (a, b) => {
             return false
         }
     }
-    /////////////////
-
-const slice = (arg, startAt = 0, endAt = arg.length) => {
-    if (startAt < 0) {
-        startAt = arg.length + startAt
+    /////////
+const cutFirst = (str) => {
+    let res = ''
+    for (let i = 2; i < str.length; i++) {
+        res += str[i]
     }
+    return res
+}
 
-    if (endAt < 0) {
-        endAt = arg.length + endAt
-    }
-
-    let res
-
-    if (Array.isArray(arg)) {
-        res = []
-    } else {
-        res = ''
-    }
-
-    for (let i = startAt; i < endAt; i++) {
-        if (Array.isArray(arg)) {
-            res.push(arg[i])
-        } else {
-            res += arg[i]
-        }
+const cutLast = (str) => {
+    let res = ''
+    for (let i = 0; i < str.length - 2; i++) {
+        res += str[i]
     }
 
     return res
 }
 
 
-// handle String
-t(() => slice('abcdef', 2) === 'cdef')
-t(() => slice('abcdef', -2) === 'ef')
-t(() => slice('abcdef', 0, 2) === 'ab')
-t(() => slice('abcdef', 0, -2) === 'abcd')
-t(() => slice('abcdef', 2, 4) === 'cd')
-t(() => slice('abcdef', -3, -1) === 'de')
-    // handle Array
-t(({ eq }) => eq(slice([1, 2, 3, 4, 5, 6], 2), [3, 4, 5, 6]))
-t(({ eq }) => eq(slice([1, 2, 3, 4, 5, 6], -2), [5, 6]))
-t(({ eq }) => eq(slice([1, 2, 3, 4, 5, 6], 0, 2), [1, 2]))
-t(({ eq }) => eq(slice([1, 2, 3, 4, 5, 6], 0, -2), [1, 2, 3, 4]))
-    // t(({ eq }) => eq(slice([1, 2, 3, 4, 5, 6], 2, 4), [3, 4]))
-    // t(({ eq }) => eq(slice([1, 2, 3, 4, 5, 6], -3, -1), [4, 5]))
-console.log(slice([1, 2, 3, 4, 5, 6], 2))
-console.log(slice([1, 2, 3, 4, 5, 6], -2))
-console.log(slice([1, 2, 3, 4, 5, 6], 0, 2))
+const cutFirstLast = (str) => {
+    let res = ''
+    for (let i = 2; i < str.length - 2; i++) {
+        res += str[i]
+    }
 
-console.log(slice([1, 2, 3, 4, 5, 6], 0, -2))
+    return res
+}
+
+const keepFirst = (str) => {
+    let res = ''
+
+    if (str.length <= 2) {
+        return str
+    }
+
+    for (let i = 0; i < 2; i++) {
+        res += str[i]
+    }
+    return res
+}
+
+const keepLast = (str) => {
+    let res = ''
+
+    if (str.length <= 2) {
+        return str
+    }
+
+    for (let i = str.length - 2; i < str.length; i++) {
+        res += str[i]
+    }
+    return res
+}
+
+const keepFirstLast = (str) => {
+    if (str.length < 4) {
+        return str
+    }
+    let res = keepFirst(str) + keepLast(str)
+    return res
+}
 
 
-console.log(slice([1, 2, 3, 4, 5, 6], 2, 4))
-console.log(slice([1, 2, 3, 4, 5, 6], -3, -1))
 
+t(() => cutFirst('abcdef') === 'cdef')
+t(() => cutFirst('a') === '')
+
+t(() => cutLast('abcdef') === 'abcd')
+t(() => cutLast('a') === '')
+
+t(() => cutFirstLast('abcdef') === 'cd')
+t(() => cutFirstLast('af') === '')
+t(() => cutFirstLast('afd') === '')
+t(() => cutFirstLast('yoafdyo') === 'afd')
+
+t(() => keepFirst('abcdef') === 'ab')
+t(() => keepFirst('a') === 'a')
+
+t(() => keepLast('abcdef') === 'ef')
+t(() => keepLast('a') === 'a')
+
+
+t(() => keepFirstLast('abcdef') === 'abef')
+t(() => keepFirstLast('af') === 'af')
+t(() => keepFirstLast('afd') === 'afd')
+
+t(() => keepFirstLast('yoafdyo') === 'yoyo')
+
+
+
+
+
+
+
+
+
+
+
+
+/////////
 Object.freeze(tests)
 
 for (let i = 0; i < tests.length; i++) {
