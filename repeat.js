@@ -1,0 +1,1 @@
+const repeat = (str, nbr) => nbr === 0 ? '' : nbr === 1 ? str : str += repeat(str, nbr - 1)
