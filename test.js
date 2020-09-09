@@ -8,45 +8,26 @@ const eq = (a, b) => {
     }
 }
 
-const modulo = (a, b) => {
-    let res = 0
-    let isNegative = false
-    if (a < b && a > 0) {
-        return a
+const lastIndexOf = (arr, value, fromIndex = arr.length - 1) => {
+    for (let i = fromIndex; i >= 0; i--) {
+        if (arr[i] === value) {
+            return i
+        }
     }
 
-    if (a < 0) {
-        a = -a
-        isNegative = true
-    }
-
-    if (b < 0) {
-        b = -b
-    }
-
-    for (let i = a; i >= b; i -= b) {
-        res = i
-    }
-    res = res - b
-    if (isNegative) {
-        res = -res
-    }
-    return res
+    return last
 }
 
-t(() => modulo(34, 78) === 34)
-t(() => modulo(78, 34) === 10)
-t(() => modulo(123, 22) === 13)
-t(() => modulo(123, -22) === 13)
-t(() => modulo(-123, 22) === -13)
-t(() => modulo(-123, -22) === -13)
+t(() => lastIndexOf([1, 2, 3, 4, 5, 4, 3, 2, 1], 2) === 7)
+t(() => lastIndexOf([0, 0, t, t], t) === 3)
+t(() => lastIndexOf([0, 0, t, t], t, 3) === 3)
+t(() => lastIndexOf([t, 0, 0, t], t, 2) === 0)
 
-console.log(modulo(-123, 22))
 Object.freeze(tests)
 
 for (let i = 0; i < tests.length; i++) {
     if (!tests[i]({ eq })) {
-        console.log(tests[i])
+        console.log(tests[i]())
     } else {
         console.log('ok')
     }

@@ -36,6 +36,7 @@ const divide = (a, b) => {
         b = -b
         isNegative = true
     }
+    
     for (let i = a; i >= b; i -= b) {
         result++
     }
