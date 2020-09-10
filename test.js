@@ -21,24 +21,10 @@ const eqArr = (a,b) => {
     return true
 }
 
-const join = (arr,splitter) => {
-    let res = ''
-
-    for (let i = 0; i < arr.length; i++) {
-        res += arr[i]
-        if (i != arr.length -1 ) {
-            res += splitter
-        }
-    }
-
-    return res
-}
 
 
-
-    t(() => join(['ee', 'ff', 'g', ''], ',') === 'ee,ff,g,')
-    t(() => join(['ggg', 'ddd', 'b'], ' - ') === 'ggg - ddd - b')
-    t(() => join(['a', 'b', 'c'], ' ') === 'a b c')
+console.log(chunk(['a', 'b', 'c', 'd'], 2))
+console.log(chunk(['a', 'b', 'c', 'd'], 3))
 
 Object.freeze(tests)
 
