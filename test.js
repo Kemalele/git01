@@ -21,30 +21,16 @@ const eqArr = (a,b) => {
     return true
 }
 
-const nasa = (N) => {
-    let res = ''
 
-    for (let i = 1; i <= N;i++) {
-        if (i % 3 === 0 && i % 5 === 0) {
-            res += 'NASA'
-        } else if (i % 5 === 0) {
-            res += 'SA'
-        }  else if (i % 3 === 0) {
-            res += 'NA'
-        } else {
-            res += i.toString()
-        }
 
-        if (i != N) {
-            res += ' '
-        }
-    }
-    
-    return res
-}
+t(({ eq }) => eq(RNA(''), ''))
+t(({ eq }) => eq(RNA('TAGC'), 'AUCG'))
+t(({ eq }) => eq(RNA(DNA('AUCG')), 'AUCG'))
 
-console.log(nasa(15) === '1 2 NA 4 SA NA 7 8 NA SA 11 NA 13 14 NASA')
-console.log(nasa(15))
+t(({ eq }) => eq(DNA(''), ''))
+t(({ eq }) => eq(DNA('AUCG'), 'TAGC'))
+t(({ eq }) => eq(DNA(RNA('TAGC')), 'TAGC'))
+
 Object.freeze(tests)
 
 for (let i = 0; i < tests.length; i++) {
