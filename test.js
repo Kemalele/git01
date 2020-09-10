@@ -8,40 +8,36 @@ const eq = (a, b) => {
     }
 }
 
-
-const trunc = (num) => {
-    if (Number.isInteger(num)) {
-        return num
-    }
-    let isNegative
-    let realNumber
-
-    if (num < 0) {
-        isNegative = true
-        num = -num
+const reverse = (arg) => {
+    let res
+    if (typeof arg === 'string') {
+        res = ''
+    } else {
+        res = []
     }
 
-    realNumber = num % 1
+    for (let i = arg.length -1 ; i >= 0 ; i--) {
+        if (typeof arg === 'string') {
+            res += arg[i] 
+        } else {
+            res.push(arg[i])
+        }
+     }
 
-    num -= realNumber
-    if (isNegative) {
-        num = -num
-    }
-    return num
+     return res
+
 }
 
-console.log(
-    trunc(13.37),    // 13
-    trunc(42.84),    // 42
-    trunc(0.123),    //  0
-    trunc(-0.123),   // -0
-)
+console.log(reverse([1, 2, 3]),[3,2,1])
+t(({ eq }) => eq(reverse([1, 2, 3]), [3, 2, 1]))
+// t(({ eq }) => eq(reverse('pouet'), 'teuop'))
+// t(({ eq }) => eq(reverse("salut c'est cool"), "looc tse'c tulas"))
 
 Object.freeze(tests)
 
 for (let i = 0; i < tests.length; i++) {
     if (!tests[i]({ eq })) {
-        console.log(tests[i]())
+        console.log(tests[i]({ eq }))
     } else {
         console.log('ok')
     }
