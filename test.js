@@ -23,19 +23,28 @@ const eqArr = (a,b) => {
 
 
 
-t(({ eq }) => eq(RNA(''), ''))
-t(({ eq }) => eq(RNA('TAGC'), 'AUCG'))
-t(({ eq }) => eq(RNA(DNA('AUCG')), 'AUCG'))
 
-t(({ eq }) => eq(DNA(''), ''))
-t(({ eq }) => eq(DNA('AUCG'), 'TAGC'))
-t(({ eq }) => eq(DNA(RNA('TAGC')), 'TAGC'))
+// work with simple key / values
+t(() => get({ key: 'value' }, 'key') === 'value')
+
+// work with nested objects
+t(() => get({ nested: { key: 'value' } }, 'nested.key') === 'value')
+
+//return undefined without error if the value do not exist
+t(() => get({ key: 'value' }, 'nx') === undefined)
+t(() => get({ nested: { key: 'value' } }, 'nested.nx') === undefined)
+t(() => get({ nested: { key: 'value' } }, 'na.nx') === undefined)
+
+// // work with nested arrays too
+t(() => get({ a: [{ b: t }] }, 'a.0.b') === t)
+t(() => get({ a: [{ b: t }] }, 'a.0.b.toString') === t.toString)
+
 
 Object.freeze(tests)
 
 for (let i = 0; i < tests.length; i++) {
     if (!tests[i]({ eq })) {
-        console.log(tests[i]({eq}))
+        console.log(tests[i]())
     } else {
         console.log('ok')
     }
