@@ -4,6 +4,7 @@ const sameAmount = (str, a, b) => {
     }
     let aCount = 0
     let bCount = 0
+    let kek
     
     a = new RegExp(a,'g')
     b = new RegExp(b,'g')
