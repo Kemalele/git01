@@ -20,36 +20,10 @@ const eqArr = (a,b) => {
 
     return true
 }
-const normal = RegExp("hi")
-const begin = RegExp("^hi")
-const end = RegExp("hi$")
-const beginEnd = RegExp("^hi$")
 
-// t(() => normal.test('hi'))
-// t(() => normal.test('higher'))
-// t(() => !normal.test('likelihood'))
-// t(() => !normal.test('Hi'))
-// t(() => normal.test('I love sushi'))
+const letterSpaceNumber = (str) => str.match(/[A-Za-z]\s\d(?!\w)/g)
 
-// t(() => begin.test('hi'))
-// t(() => begin.test('higher'))
-// t(() => begin.test('hired'))
-// t(() => !begin.test('likelihood'))
-// t(() => !begin.test('Hi'))
-// t(() => !begin.test('I love sushi'))
 
-// t(() => end.test('hi'))
-// t(() => !end.test('higher'))
-// t(() => !end.test('likelihood'))
-// t(() => !end.test('Hi'))
-// t(() => end.test('I love sushi'))
-
-t(() => beginEnd.test('hi'))
-t(() => !beginEnd.test('hired kimchi'))
-t(() => !beginEnd.test('higher'))
-t(() => !beginEnd.test('likelihood'))
-t(() => !beginEnd.test('Hi'))
-t(() => !beginEnd.test('I love sushi'))
 
 let failed = false
 let fails = []
