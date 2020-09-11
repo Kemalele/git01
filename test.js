@@ -21,8 +21,13 @@ const eqArr = (a,b) => {
     return true
 }
 
-const letterSpaceNumber = (str) => str.match(/[A-Za-z]\s\d(?!\w)/g) === null? [] : str.match(/[A-Za-z]\s\d(?!\w)/g)
-console.log(letterSpaceNumber('s '))
+
+
+
+t(({ eq }) => eq(vowelDots('something'), 'so.me.thi.ng'))
+t(({ eq }) => eq(vowelDots(''), ''))
+t(({ eq }) => eq(vowelDots('rhythm'), 'rhythm'))
+t(({ eq }) => eq(vowelDots('Algorithm'), 'A.lgo.ri.thm'))
 
 let failed = false
 let fails = []
