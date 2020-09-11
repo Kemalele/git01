@@ -1,6 +1,7 @@
 export const tests = []
 const t = (f) => tests.push(f)
 
+
 t(() => sameAmount('hello how are you', /l/, /e/))
 t(() => sameAmount('hello how are you', /h/, /e/))
 t(() => sameAmount('hello how are you', /he/, /ho/))

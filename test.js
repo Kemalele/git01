@@ -21,27 +21,43 @@ const eqArr = (a,b) => {
     return true
 }
 
+const data = `qqqqqqq q qqqqqqqfsqqqqq q qq  qw w wq wqw  wqw
+ ijnjjnfapsdbjnkfsdiqw klfsdjn fs fsdnjnkfsdjnk sfdjn fsp fd`
 
-const vowels = /[AEIOUaeiou]/g
-
-const vowelDots = (str) => {
-    let newstr = ''
-    for (let i = 0; i < str.length; i++) {
-        newstr+=str[i]
-        if (vowels.test(str[i])) {
-            newstr+='.'
-        }
+const sameAmount = (str, a, b) => {
+    a = a.exec(str)
+    b = b.exec(str)
+    if (a  === null || b  === null) {
+        return false
     }
-    return newstr
+    
+    if (a.length === b.length) {
+        return true
+    }
+    
+    return false
 }
+console.log(sameAmount(data, /q /, /qqqqqqq/))
 
-console.log(vowelDots('something'))
+t(() => !sameAmount(data, /q /, /qqqqqqq/))//
+t(() => !sameAmount(data, /j/, / /))//
 
-t(({ eq }) => vowels.test('a') && !vowels.test('c'))
-t(({ eq }) => eq(vowelDots('something'), 'so.me.thi.ng'))
-t(({ eq }) => eq(vowelDots(''), ''))
-t(({ eq }) => eq(vowelDots('rhythm'), 'rhythm'))
-t(({ eq }) => eq(vowelDots('Algorithm'), 'A.lgo.ri.thm'))
+// t(() => sameAmount('hello how are you', /l/, /e/))
+// t(() => sameAmount('hello how are you', /h/, /e/))
+// t(() => sameAmount('hello how are you', /he/, /ho/))
+
+// t(() => sameAmount(data, /i/, /p/))
+// t(() => !sameAmount(data, /h/, /w/))
+// t(() => sameAmount(data, /qqqq /, /qqqqqqq/))
+// t(() => sameAmount(data, /fs[^q]/, /q /))
+// t(() => sameAmount(data, /^[qs]/, /^[gq]/))
+// t(() => sameAmount(data, /j/, /w/))
+// t(() => sameAmount(data, /fs./, /jn./))
+
+Object.freeze(tests)
+
+
+
 
 let failed = false
 let fails = []
