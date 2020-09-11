@@ -1,6 +1,10 @@
 const tests = []
 const t = (f) => tests.push(f)
 const eq = (a, b) => {
+    if (Array.isArray(a)) {
+        return eqArr(a,b)
+    }
+
     if (a === b) {
         return true
     } else {
@@ -21,48 +25,27 @@ const eqArr = (a,b) => {
     return true
 }
 
-const data = `qqqqqqq q qqqqqqqfsqqqqq q qq  qw w wq wqw  wqw
- ijnjjnfapsdbjnkfsdiqw klfsdjn fs fsdnjnkfsdjnk sfdjn fsp fd`
-
-const sameAmount = (str, a, b) => {
-    if (a.exec(str)  === null || b.exec(str)  === null) {
-        return false
+const ionOut = (str) => {
+    let reg = /[\w]+(?<=t)(?=ion)/g
+    if (str.match(reg) === null) {
+        return []
     }
-    let kek
-
-    let aCount = 0
-    let bCount = 0
-    a = new RegExp(a,'g')
-    b = new RegExp(b,'g')
-    while (kek = a.exec(str))aCount++
-    while (kek = b.exec(str))bCount++
-
-    if (aCount === bCount) {
-        return true
-    }
-    
-    return false
+    return str.match(reg)
 }
-console.log(sameAmount(data, /q /, /qqqqqqq/))
 
-t(() => !sameAmount(data, /q /, /qqqqqqq/))//
-t(() => !sameAmount(data, /j/, / /))//
 
-t(() => sameAmount('hello how are you', /l/, /e/))
-t(() => sameAmount('hello how are you', /h/, /e/))
-t(() => sameAmount('hello how are you', /he/, /ho/))
+t(({ eq }) => eq(ionOut('attention, direction'), ['attent', 'direct']))
+t(({ eq }) => eq(ionOut('promotion, provision'), ['promot']))
+t(({ eq }) => eq(ionOut('transfusion'), []))
+t(({ eq }) =>
+  eq(ionOut(' 1st position is the vision of the 2nd position'), [
+    'posit',
+    'posit',
+  ]),
+)
 
-t(() => sameAmount(data, /i/, /p/))
-t(() => !sameAmount(data, /h/, /w/))
-t(() => sameAmount(data, /qqqq /, /qqqqqqq/))
-t(() => sameAmount(data, /fs[^q]/, /q /))
-t(() => sameAmount(data, /^[qs]/, /^[gq]/))
-t(() => sameAmount(data, /j/, /w/))
-t(() => sameAmount(data, /fs./, /jn./))
 
 Object.freeze(tests)
-
-
 
 
 let failed = false
