@@ -1,6 +1,7 @@
 export const tests = []
 const t = (f) => tests.push(f)
 
+
 t(() => normal.test('hi'))
 t(() => normal.test('higher'))
 t(() => !normal.test('likelihood'))
