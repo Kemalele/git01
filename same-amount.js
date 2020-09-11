@@ -1,11 +1,16 @@
 const sameAmount = (str, a, b) => {
-    a = a.exec(str)
-    b = b.exec(str)
-    if (a  === null || b  === null) {
+    if (a.exec(str)  === null || b.exec(str)  === null) {
         return false
     }
+    let aCount = 0
+    let bCount = 0
     
-    if (a.length === b.length) {
+    a = new RegExp(a,'g')
+    b = new RegExp(b,'g')
+    while (kek = a.exec(str))aCount++
+    while (kek = b.exec(str))bCount++
+
+    if (aCount === bCount) {
         return true
     }
     
