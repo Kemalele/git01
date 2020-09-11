@@ -21,9 +21,8 @@ const eqArr = (a,b) => {
     return true
 }
 
-const letterSpaceNumber = (str) => str.match(/[A-Za-z]\s\d(?!\w)/g)
-
-
+const letterSpaceNumber = (str) => str.match(/[A-Za-z]\s\d(?!\w)/g) === null? [] : str.match(/[A-Za-z]\s\d(?!\w)/g)
+console.log(letterSpaceNumber('s '))
 
 let failed = false
 let fails = []
