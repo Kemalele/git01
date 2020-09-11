@@ -22,8 +22,22 @@ const eqArr = (a,b) => {
 }
 
 
+const vowels = /[AEIOUaeiou]/g
 
+const vowelDots = (str) => {
+    let newstr = ''
+    for (let i = 0; i < str.length; i++) {
+        newstr+=str[i]
+        if (vowels.test(str[i])) {
+            newstr+='.'
+        }
+    }
+    return newstr
+}
 
+console.log(vowelDots('something'))
+
+t(({ eq }) => vowels.test('a') && !vowels.test('c'))
 t(({ eq }) => eq(vowelDots('something'), 'so.me.thi.ng'))
 t(({ eq }) => eq(vowelDots(''), ''))
 t(({ eq }) => eq(vowelDots('rhythm'), 'rhythm'))
