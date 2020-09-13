@@ -1,23 +1,25 @@
-const add4 = '+4'
-const mul2 = '*2'
-// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 
+
+const add4 = '+4'
+const mul2 = '*2'
 const result = (expression) =>
-  expression
+    expression
     .slice(2)
     .split(' ')
     .reduce((total, op) => {
-      if (op === '+4') return total + 4
-      if (op === '*2') return total * 2
-      throw Error(`unknown op ${op}`)
+        if (op === '+4') return total + 4
+        if (op === '*2') return total * 2
+        throw Error(`unknown op ${op}`)
     }, 1)
 
 t(
-  ({ code }) =>
+    ({ code }) =>
     !/[5-9]/g.test(code) && code.includes('add4') && code.includes('mul2'),
 )
+
+
 
 t(({ eq }) => eq(result(findExpression(8)), 8))
 t(({ eq }) => eq(result(findExpression(14)), 14))
